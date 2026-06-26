@@ -1,10 +1,1 @@
-[[redirects]]
-  from = "/piratifier"
-  to = "/piratifier/manifest.json"
-  status = 200
-  conditions = {User-Agent = ["*Discord*", "*Revenge*", "*okhttp*", "*vendetta*"]}
-
-[[redirects]]
-  from = "/piratifier"
-  to = "/piratifier/index.html"
-  status = 200
+/piratifier /piratifier/index.html 200
