@@ -366,7 +366,7 @@ const infoHtml = `<!DOCTYPE html>
 <body>
     <div class="container">
         <h1>Piratifier</h1>
-        <p>To install this plugin, use the link below in your client settings:</p>
+        <p>To install this plugin, use the link below in your revenge client:</p>
         <div class="input-group">
             <input type="text" id="pluginLink" value="https://tuffestplugins.pages.dev/piratifier" readonly>
             <button onclick="copyLink()">Copy</button>
