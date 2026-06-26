@@ -1,14 +1,6 @@
-import { readFile, writeFile, readdir } from "fs/promises";
-import { existsSync } from "fs";
-import { extname } from "path";
-import { createHash } from "crypto";
-
-import { rollup } from "rollup";
-import esbuild from "rollup-plugin-esbuild";
-import commonjs from "@rollup/plugin-commonjs";
-import nodeResolve from "@rollup/plugin-node-resolve";
 import { transform, initSync } from "@swc/wasm-web/wasm.js";
 import { readFileSync } from "fs";
+import { copyFile } from "fs/promises";
 
 try {
     const wasmPath = new URL("./node_modules/@swc/wasm-web/wasm_bg.wasm", import.meta.url);
@@ -19,15 +11,19 @@ try {
     console.error("Wasm initialization failed", e);
 }
 
-
 const swc = { transform };
+import { readFile, writeFile, readdir } from "fs/promises";
+import { existsSync } from "fs";
+import { extname } from "path";
+import { createHash } from "crypto";
 
-
-
+import { rollup } from "rollup";
+import esbuild from "rollup-plugin-esbuild";
+import commonjs from "@rollup/plugin-commonjs";
+import nodeResolve from "@rollup/plugin-node-resolve";
 
 const extensions = [".js", ".jsx", ".mjs", ".ts", ".tsx", ".cts", ".mts"];
 
-/** @type import("rollup").InputPluginOption */
 const plugins = [
     nodeResolve(),
     commonjs(),
@@ -65,7 +61,6 @@ const plugins = [
     esbuild({ minify: true }),
 ];
 
-// prod
 for (let plug of await readdir("./plugins")) {
     const manifest = JSON.parse(await readFile(`./plugins/${plug}/manifest.json`));
     const outPath = `./dist/${plug}/index.js`;
@@ -105,12 +100,9 @@ for (let plug of await readdir("./plugins")) {
     }
 }
 
-// Dev
 const devPath = 'dev';
 if (existsSync(`./${devPath}`)) {
-
     console.log('DEVELOPMENT')
-
     for (let plug of await readdir(`./${devPath}`)) {
         const manifest = JSON.parse(await readFile(`./${devPath}/${plug}/manifest.json`));
         const outPath = `./dist/dev/${plug}/index.js`;
@@ -151,3 +143,9 @@ if (existsSync(`./${devPath}`)) {
     }
 }
 
+if (existsSync("./_redirects")) {
+    await copyFile("./_redirects", "./dist/_redirects");
+}
+if (existsSync("./_headers")) {
+    await copyFile("./_headers", "./dist/_headers");
+}
