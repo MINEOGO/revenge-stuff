@@ -7,15 +7,12 @@ import { registerCommand } from "@vendetta/commands";
 
 const patches = [];
 
-// ─── Massive on-device pirate dictionary ─────────────────────────────────────
 const dictionary = {
-    // Greetings & basic
     "hello": "ahoy", "hi": "ahoy", "hey": "ahoy", "howdy": "ahoy there",
     "goodbye": "fare thee well", "bye": "fare thee well", "later": "till next tide",
     "welcome": "well met", "please": "prithee", "sorry": "I beg yer pardon",
     "excuse me": "avast", "look": "avast", "watch out": "avast",
 
-    // Pronouns / determiners
     "my": "me", "your": "yer", "you": "ye", "i": "I",
     "i'm": "I be", "i am": "I be", "i'll": "I shall", "i've": "I have",
     "i'd": "I'd", "i was": "I were", "you're": "ye be", "you are": "ye be",
@@ -25,7 +22,6 @@ const dictionary = {
     "their": "their own", "we": "we", "our": "our own", "us": "us lot",
     "it": "it", "its": "its",
 
-    // Verbs & auxiliaries
     "is": "be", "are": "be", "am": "be", "was": "were", "were": "be",
     "will": "shall", "would": "would", "could": "could", "should": "should",
     "have": "have", "has": "have", "had": "had", "do": "do", "does": "do",
@@ -42,7 +38,6 @@ const dictionary = {
     "ask": "beseech", "use": "make use of", "make": "craft",
     "put": "place", "let": "allow", "keep": "hold",
 
-    // People / titles
     "friend": "matey", "friends": "mateys", "man": "matey", "men": "mateys",
     "woman": "wench", "women": "wenches", "boy": "lad", "boys": "lads",
     "girl": "lass", "girls": "lasses", "people": "scallywags",
@@ -53,16 +48,13 @@ const dictionary = {
     "princess": "lass", "soldier": "bilge rat", "cop": "landlubber",
     "police": "landlubbers", "teacher": "wise elder", "doctor": "ship's surgeon",
 
-    // Yes / No
     "yes": "aye", "yeah": "aye", "yep": "aye", "no": "nay",
     "nope": "nay", "not": "nay",
 
-    // Money / treasure
     "money": "doubloons", "gold": "doubloons", "cash": "booty",
     "treasure": "booty", "rich": "flush with doubloons", "wealth": "plunder",
     "coins": "doubloons", "dollars": "doubloons", "bucks": "doubloons",
 
-    // Drink & food
     "beer": "grog", "wine": "grog", "liquor": "grog", "drink": "grog",
     "alcohol": "spirits", "water": "scuttlebutt", "soda": "sweet water",
     "juice": "sweet water", "milk": "goat's milk", "tea": "hot grog",
@@ -71,7 +63,6 @@ const dictionary = {
     "biscuit": "hard tack", "cookies": "hard tack", "cake": "sweet biscuit",
     "fish": "fresh catch", "chicken": "landlubber's bird",
 
-    // Location / directions
     "left": "port", "right": "starboard", "front": "bow", "back": "stern",
     "forward": "fore", "backward": "aft", "up": "aloft", "down": "below",
     "here": "hither", "there": "thither", "where": "whither",
@@ -83,7 +74,6 @@ const dictionary = {
     "ship": "vessel", "car": "land vessel", "truck": "heavy land vessel",
     "plane": "sky vessel", "island": "isle",
 
-    // Actions / verbs
     "fight": "clash blades", "fighting": "clashing blades",
     "kill": "send to Davy Jones' locker", "die": "walk the plank",
     "attack": "board", "destroy": "scuttle", "sink": "scuttle",
@@ -98,13 +88,12 @@ const dictionary = {
     "sleep": "catch some shuteye", "sleeping": "snoozing in the hammock",
     "work": "toil", "working": "toilin'",
 
-    // Adjectives
     "small": "wee", "little": "wee", "big": "mighty", "large": "mighty",
     "great": "grand", "good": "fine", "bad": "rotten", "old": "barnacle-covered",
     "new": "fresh", "young": "spry", "fast": "fleet", "slow": "sluggish",
     "heavy": "burdensome", "light": "featherweight", "hot": "blazin'",
     "cold": "freezin'", "warm": "balmy", "cool": "breezy",
-    "wet": "soggy", "dry": "parched", "dirty": "grimy", "clean": "swabbed",
+    "wet": "soggy", "dry": "parched", "dirty": "grimy",
     "beautiful": "fair", "ugly": "homely", "strong": "hearty",
     "weak": "feeble", "brave": "bold", "happy": "jolly", "sad": "dreary",
     "angry": "wrathful", "scared": "lily-livered", "tired": "weary",
@@ -115,10 +104,9 @@ const dictionary = {
     "safe": "secure", "dangerous": "perilous", "danger": "peril",
     "easy": "simple", "difficult": "a hard trial", "loud": "boisterous",
     "quiet": "silent as the deep", "soft": "gentle", "hard": "stiff",
-    "full": "brimming", "empty": "hollow", "open": "unlocked",
+    "full": "brimming", "empty": "hollow",
     "near": "nigh", "far": "a great distance away",
 
-    // Nouns / things
     "sword": "cutlass", "knife": "dagger", "gun": "flintlock",
     "pistol": "flintlock", "cannon": "great gun", "bullets": "grape shot",
     "ammo": "powder and shot", "bomb": "powder keg", "treasure chest": "bounty chest",
@@ -145,8 +133,7 @@ const dictionary = {
     "god": "the sea gods", "heaven": "the great beyond",
     "hell": "Davy Jones' locker", "world": "the known seas",
 
-    // Contractions and filler
-    "the": "ye", "of": "o'", "and": "an'", "or": "or",
+    "the": "ye", "of": "o'", "and": "an'",
     "but": "but", "that": "that", "this": "this here",
     "these": "these here", "those": "them", "a": "a", "an": "a",
     "with": "wi'", "without": "without", "about": "about",
@@ -160,17 +147,16 @@ const dictionary = {
     "always": "always", "often": "oft", "sometimes": "at times",
     "already": "already", "yet": "yet", "again": "once more",
     "together": "as one crew", "alone": "without yer shipmates",
-    "away": "away", "back": "back", "out": "out",
+    "away": "away", "out": "out",
     "in": "aboard", "into": "into", "onto": "onto",
     "off": "off", "over": "o'er", "under": "beneath",
     "around": "about", "between": "betwixt", "against": "against",
     "behind": "astern of", "inside": "within the hull",
     "outside": "on deck", "next": "next", "last": "last",
-    "first": "first", "second": "second", "third": "third",
     "okay": "aye aye", "ok": "aye aye", "sure": "aye, sure enough",
     "thanks": "ye have me gratitude", "thank you": "ye have me deepest gratitude",
     "thank": "tip me hat to", "wow": "shiver me timbers",
-    "damn": "blast", "hell": "Davy Jones' locker", "crap": "barnacles",
+    "damn": "blast", "crap": "barnacles",
     "shit": "bilge water", "fuck": "blimey", "ass": "stern",
     "idiot": "bilge rat", "loser": "lily-livered scoundrel",
     "lol": "har har", "lmao": "har har har", "haha": "har har",
@@ -180,14 +166,12 @@ const dictionary = {
     "gg": "well fought, matey", "rip": "lost to the depths",
 };
 
-// Pirate exclamations to sprinkle in
 const exclamations = [
     "Ahoy!", "Arr!", "Arrrgh!", "Shiver me timbers!", "Blimey!", "Avast!",
     "Yo-ho-ho!", "Har har!", "By Davy Jones' beard!", "Hoist the colours!",
     "Dead men tell no tales!", "Batten down the hatches!", "Fire the cannons!",
 ];
 
-// Pirate suffixes to append
 const suffixes = [
     ", arr!", ", matey!", ", ye scurvy dog!", ", says I!", ", mark me words!",
     ", or I'll feed ye to the sharks!", ", on me honour as a pirate!",
@@ -197,60 +181,41 @@ const suffixes = [
 function localPiratify(text) {
     if (!text || !text.trim()) return text;
 
-    // First pass: replace multi-word phrases (sorted longest first to avoid partial matches)
     const sortedKeys = Object.keys(dictionary).sort((a, b) => b.length - a.length);
 
     let result = text;
     for (const phrase of sortedKeys) {
-        if (!phrase.includes(" ")) continue; // multi-word only in this pass
+        if (!phrase.includes(" ")) continue;
         const regex = new RegExp(`\\b${phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "gi");
-        result = result.replace(regex, (match) => {
+        result = result.replace(regex, match => {
             const repl = dictionary[phrase];
-            // Preserve capitalisation
-            if (match[0] === match[0].toUpperCase() && match[0] !== match[0].toLowerCase()) {
+            if (match[0] === match[0].toUpperCase() && match[0] !== match[0].toLowerCase())
                 return repl.charAt(0).toUpperCase() + repl.slice(1);
-            }
             return repl;
         });
     }
 
-    // Second pass: single words
     const words = result.split(/\b/);
     for (let i = 0; i < words.length; i++) {
         const w = words[i].toLowerCase();
-        if (dictionary[w] && !dictionary[w].includes(" ")) {
-            // Only replace if it's a single-word replacement (multi handled above)
-            const repl = dictionary[w];
-            if (words[i][0] && words[i][0] === words[i][0].toUpperCase() && words[i][0] !== words[i][0].toLowerCase()) {
-                words[i] = repl.charAt(0).toUpperCase() + repl.slice(1);
-            } else {
-                words[i] = repl;
-            }
-        } else if (dictionary[w] && dictionary[w].includes(" ")) {
-            // multi-word replacement for single word key
-            const repl = dictionary[w];
-            if (words[i][0] && words[i][0] === words[i][0].toUpperCase() && words[i][0] !== words[i][0].toLowerCase()) {
-                words[i] = repl.charAt(0).toUpperCase() + repl.slice(1);
-            } else {
-                words[i] = repl;
-            }
-        }
+        if (!dictionary[w]) continue;
+        const repl = dictionary[w];
+        if (words[i][0] && words[i][0] === words[i][0].toUpperCase() && words[i][0] !== words[i][0].toLowerCase())
+            words[i] = repl.charAt(0).toUpperCase() + repl.slice(1);
+        else
+            words[i] = repl;
     }
     result = words.join("");
 
-    // Add pirate contractions: -ing → -in'
-    result = result.replace(/\b(\w+)ing\b/g, (match, stem) => stem + "in'");
+    result = result.replace(/\b(\w+)ing\b/g, (_, stem) => stem + "in'");
 
-    // Add a random exclamation at start ~30% of the time
     if (Math.random() < 0.3) {
         const exc = exclamations[Math.floor(Math.random() * exclamations.length)];
         result = exc + " " + result;
     }
 
-    // Add a random suffix ~50% of the time
     if (Math.random() < 0.5) {
         const suf = suffixes[Math.floor(Math.random() * suffixes.length)];
-        // Remove trailing punctuation before adding suffix
         result = result.replace(/[.!?]+$/, "") + suf;
     }
 
@@ -258,18 +223,14 @@ function localPiratify(text) {
 }
 
 async function fetchPiratify(text) {
-    const res = await fetch(
-        `https://pirate.monkeyness.com/api/translate?english=${encodeURIComponent(text)}`
-    );
-    if (!res.ok) throw new Error("API error");
+    const res = await fetch(`https://pirate.monkeyness.com/api/translate?english=${encodeURIComponent(text)}`);
+    if (!res.ok) throw new Error("api died");
     return await res.text();
 }
 
 async function piratify(text) {
     storage.settings ??= {};
-    if (storage.settings.on_device) {
-        return localPiratify(text);
-    }
+    if (storage.settings.on_device) return localPiratify(text);
     try {
         return await fetchPiratify(text);
     } catch {
@@ -286,17 +247,14 @@ export default {
 
     onLoad() {
         storage.settings ??= {};
-        if (storage.settings.on_device === undefined) {
-            storage.settings.on_device = true;
-        }
+        if (storage.settings.on_device === undefined) storage.settings.on_device = true;
 
-        // ── Patch sendMessage to auto-piratify ─────────────────────────────
         const Messages = findByProps("sendMessage", "receiveMessage");
         patches.push(
             instead("sendMessage", Messages, async (args, orig) => {
-                if (!args[1] || args[1]._piratify_skip || args[1]._command_output) {
+                if (!args[1] || args[1]._piratify_skip || args[1]._command_output)
                     return orig.apply(this, args);
-                }
+
                 const text = args[1]?.content;
                 if (!text) return orig.apply(this, args);
 
@@ -310,16 +268,15 @@ export default {
             })
         );
 
-        // ── /piratify slash command ─────────────────────────────────────────
         patches.push(
             registerCommand({
                 name: "piratify",
                 displayName: "piratify",
-                description: "Piratify a message and send it",
-                displayDescription: "Piratify a message and send it",
+                description: "Piratify a message and send it. Uses pirate.monkeyness.com (external API) unless on-device is set to true.",
+                displayDescription: "Piratify a message and send it. Uses pirate.monkeyness.com (external API) unless on-device is set to true.",
                 applicationId: "-1",
-                inputType: 1, // BUILT_IN_TEXT
-                type: 1,      // CHAT
+                inputType: 1,
+                type: 1,
                 options: [
                     {
                         name: "message",
@@ -327,27 +284,25 @@ export default {
                         description: "The message to piratify",
                         displayDescription: "The message to piratify",
                         required: true,
-                        type: 3, // STRING
+                        type: 3,
                     },
                     {
                         name: "on-device",
                         displayName: "on-device",
-                        description: "Use on-device translation instead of the API (true/false)",
-                        displayDescription: "Use on-device translation instead of the API (true/false)",
+                        description: "true = on-device only, false = sends message to pirate.monkeyness.com (external, not owned by Revenge or the plugin author)",
+                        displayDescription: "true = on-device only, false = sends message to pirate.monkeyness.com (external, not owned by Revenge or the plugin author)",
                         required: false,
-                        type: 5, // BOOLEAN
+                        type: 5,
                     },
                 ],
                 async execute(args, ctx) {
-                    const messageArg = args.find((a) => a.name === "message");
-                    const onDeviceArg = args.find((a) => a.name === "on-device");
+                    const messageArg = args.find(a => a.name === "message");
+                    const onDeviceArg = args.find(a => a.name === "on-device");
 
                     const text = messageArg?.value;
                     if (!text) return { content: "Arr! Give me something to piratify, ye scallywag!" };
 
-                    // If on-device arg given, use it; otherwise use global setting
-                    const useOnDevice =
-                        onDeviceArg !== undefined ? onDeviceArg.value : storage.settings.on_device;
+                    const useOnDevice = onDeviceArg !== undefined ? onDeviceArg.value : storage.settings.on_device;
 
                     let pirated;
                     if (useOnDevice) {
@@ -360,12 +315,8 @@ export default {
                         }
                     }
 
-                    // Send the pirated message (skip the sendMessage patch so it doesn't double-piratify)
-                    const Messages2 = findByProps("sendMessage", "receiveMessage");
-                    Messages2.sendMessage(ctx.channel.id, {
-                        content: pirated,
-                        _piratify_skip: true,
-                    });
+                    const Msgs = findByProps("sendMessage", "receiveMessage");
+                    Msgs.sendMessage(ctx.channel.id, { content: pirated, _piratify_skip: true });
                 },
             })
         );
