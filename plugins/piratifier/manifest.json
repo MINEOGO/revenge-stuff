@@ -1,6 +1,6 @@
 {
   "name": "Piratifier",
-  "description": "itll make your messages slower, you can choose whether if you want to use the ai, or on-device translation in settings.",
+  "description": "Turns all yer messages into pirate speak! Uses the monkeyness.com API by default, with a powerful on-device fallback. Supports /piratify command.",
   "authors": [{ "name": "mineogo", "id": "1472903546730184816" }],
   "main": "./index.js",
   "vendetta": { "icon": "ic_application_command_24px" }
