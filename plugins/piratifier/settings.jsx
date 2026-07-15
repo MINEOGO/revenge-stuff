@@ -11,13 +11,11 @@ export default function Settings() {
     storage.settings ??= {};
 
     function handleOnDeviceToggle(val) {
-        // Switching ON (enabling on-device) = no warning needed
         if (val) {
             storage.settings.on_device = true;
             return;
         }
 
-        // Switching OFF (disabling on-device = enabling API) = show warning
         showConfirmationAlert({
             title: "⚠️ External API Warning",
             content:
@@ -31,7 +29,8 @@ export default function Settings() {
                 storage.settings.on_device = false;
             },
             onCancel: () => {
-                // Do nothing — stay on on-device
+                // Force a storage re-render to toggle the switch back to checked if cancelled
+                storage.settings.on_device = true;
             },
         });
     }
