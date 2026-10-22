@@ -1,0 +1,14 @@
+{
+  "name": "noEdit",
+  "description": "Logs edited messages and displays previous versions below.",
+  "authors": [
+    {
+      "name": "mineogo",
+      "id": "1443749553864966315"
+    }
+  ],
+  "main": "index.jsx",
+  "vendetta": {
+    "icon": "ic_edit_24px"
+  }
+}

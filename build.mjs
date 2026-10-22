@@ -256,6 +256,10 @@ const landingHtml = `<!DOCTYPE html>
                 <span class="plugin-name">Local Edit</span>
                 <button class="copy-btn" onclick="copyLink('https://tuffestplugins.pages.dev/localedit')">Copy Link</button>
             </div>
+            <div class="plugin-item">
+                <span class="plugin-name">noEdit</span>
+                <button class="copy-btn" onclick="copyLink('https://tuffestplugins.pages.dev/noEdit')">Copy Link</button>
+            </div>
         </div>
     </div>
     <div id="toast" class="toast">Link copied!</div>
@@ -405,3 +409,12 @@ const localeditHtml = infoHtml
     .replace(/<h1>Piratifier<\/h1>/g, "<h1>Local Edit</h1>")
     .replace(/https:\/\/tuffestplugins\.pages\.dev\/piratifier/g, "https://tuffestplugins.pages.dev/localedit");
 await writeFile("./dist/localedit/index.html", localeditHtml);
+
+if (!existsSync("./dist/noEdit")) {
+    await mkdir("./dist/noEdit");
+}
+const noEditHtml = infoHtml
+    .replace(/Piratifier Plugin Info/g, "noEdit Plugin Info")
+    .replace(/<h1>Piratifier<\/h1>/g, "<h1>noEdit</h1>")
+    .replace(/https:\/\/tuffestplugins\.pages\.dev\/piratifier/g, "https://tuffestplugins.pages.dev/noEdit");
+await writeFile("./dist/noEdit/index.html", noEditHtml);
