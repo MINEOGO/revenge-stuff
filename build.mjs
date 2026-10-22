@@ -91,7 +91,7 @@ for (let plug of await readdir("./plugins")) {
         const toHash = await readFile(outPath);
         manifest.hash = createHash("sha256").update(toHash).digest("hex");
         manifest.main = "index.js";
-        await writeFile(`./dist/${plug}/manifest.json`, JSON.stringify(manifest));
+        await writeFile(`./dist/${plug}/manifest.json`, JSON.stringify(manifest, null, 2));
     
         console.log(`Successfully built ${manifest.name}!`);
     } catch (e) {
@@ -252,6 +252,10 @@ const landingHtml = `<!DOCTYPE html>
                 <span class="plugin-name">Piratifier</span>
                 <button class="copy-btn" onclick="copyLink('https://tuffestplugins.pages.dev/piratifier')">Copy Link</button>
             </div>
+            <div class="plugin-item">
+                <span class="plugin-name">Local Edit</span>
+                <button class="copy-btn" onclick="copyLink('https://tuffestplugins.pages.dev/localedit')">Copy Link</button>
+            </div>
         </div>
     </div>
     <div id="toast" class="toast">Link copied!</div>
@@ -392,3 +396,12 @@ if (!existsSync("./dist/piratifier")) {
     await mkdir("./dist/piratifier");
 }
 await writeFile("./dist/piratifier/index.html", infoHtml);
+
+if (!existsSync("./dist/localedit")) {
+    await mkdir("./dist/localedit");
+}
+const localeditHtml = infoHtml
+    .replace(/Piratifier Plugin Info/g, "Local Edit Plugin Info")
+    .replace(/<h1>Piratifier<\/h1>/g, "<h1>Local Edit</h1>")
+    .replace(/https:\/\/tuffestplugins\.pages\.dev\/piratifier/g, "https://tuffestplugins.pages.dev/localedit");
+await writeFile("./dist/localedit/index.html", localeditHtml);
