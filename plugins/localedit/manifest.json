@@ -1,10 +1,10 @@
 {
   "name": "Local Edit",
-  "description": "Edit messages locally.",
+  "description": "edit messgaes locally.",
   "authors": [
     {
-      "name": "シグマ siguma",
-      "id": "737597276339437578"
+      "name": "mineogo",
+      "id": "1443749553864966315"
     }
   ],
   "main": "src/index.tsx",
